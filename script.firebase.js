@@ -12,6 +12,15 @@ document.addEventListener('DOMContentLoaded', function () {
     if (usernameCookie) {
         usernameInput.value = usernameCookie;
         displayNameBlock.style.display = 'none';
+        // Sign in anonymously with Firebase Auth
+        signInAnonymously(auth)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log("Anonymous user signed in:", user.uid);
+            })
+            .catch((error) => {
+                console.error("Error signing in anonymously:", error);
+            });
     } else {
         // Show the full-screen black background with blur
         document.body.style.overflow = 'hidden';
@@ -85,7 +94,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const newMessage = {
                 username: username,
                 message: messageText,
-                timestamp: new Date().toISOString(),  // Change to ISO string for Firestore timestamp
+                timestamp: new Date().toISOString(),
+                uid: auth.currentUser.uid,
             };
 
             await addMessageToFirebase(newMessage);

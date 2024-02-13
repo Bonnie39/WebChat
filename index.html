@@ -29,11 +29,12 @@
     // Import the necessary modules
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyBYdukZ8lo0jDkO1BkWnr4UgYa6hw1l7uI",
-      authDomain: "bonnie39.github.io/WebChat",
+      authDomain: "web-chat-8d861.firebaseapp.com",
       projectId: "web-chat-8d861",
       storageBucket: "web-chat-8d861.appspot.com",
       messagingSenderId: "223996312580",
@@ -44,16 +45,28 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    const auth = getAuth(app);
+    const messagesRef = collection(db, 'messages');
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in.
+            console.log("User is signed in:", user.uid);
+        } else {
+            // User is signed out.
+            console.log("User is signed out.");
+        }
+    });
+
     window.app = app;
     window.db = db;
-
-    const messagesRef = collection(db, 'messages');
     window.messagesRef = messagesRef;
-
-    window.getDocs = getDocs;
+    window.auth = auth;
     window.addDoc = addDoc;
+    window.getDocs = getDocs;
     window.query = query;
     window.orderBy = orderBy;
+    window.signInAnonymously = signInAnonymously;
 </script>
 </body>
 </html>
