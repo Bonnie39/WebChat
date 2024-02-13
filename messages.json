@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "username": "Bon",
+    "message": "this is also a test message",
+    "timestamp": "2/12/2024, 8:45:50 PM"
+  },
+  {
+    "username": "bonie",
+    "message": "eyah",
+    "timestamp": "2/12/2024, 9:23:17 PM"
+  },
+  {
+    "username": "boner",
+    "message": "yay!",
+    "timestamp": "2/12/2024, 9:23:25 PM"
+  }
+]
