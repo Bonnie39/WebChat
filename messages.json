@@ -1,22 +1,7 @@
 [
   {
     "username": "Bon",
-    "message": "this is also a test message",
+    "message": "this is a test message",
     "timestamp": "2/12/2024, 8:45:50 PM"
-  },
-  {
-    "username": "bonie",
-    "message": "eyah",
-    "timestamp": "2/12/2024, 9:23:17 PM"
-  },
-  {
-    "username": "boner",
-    "message": "yay!",
-    "timestamp": "2/12/2024, 9:23:25 PM"
-  },
-  {
-    "username": "boni",
-    "message": "mmm yummy",
-    "timestamp": "2/12/2024, 9:35:20 PM"
   }
 ]
