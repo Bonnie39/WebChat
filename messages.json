@@ -3,5 +3,10 @@
     "username": "Bon",
     "message": "this is a test message",
     "timestamp": "2/12/2024, 8:45:50 PM"
+  },
+  {
+    "username": "Bon",
+    "message": "hello!",
+    "timestamp": "2/12/2024, 9:43:49 PM"
   }
 ]
