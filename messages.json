@@ -1,7 +1,7 @@
 [
   {
     "username": "Bon",
-    "message": "this is a test message. You see this because this chat is unsafe",
+    "message": "this is a test message.",
     "timestamp": "2/12/2024, 8:45:50 PM"
   },
   {
@@ -118,10 +118,5 @@
     "username": "opa334",
     "message": "Dopamine will be released at 1 AM CET",
     "timestamp": "2/13/2024, 2:46:05 PM"
-  },
-  {
-    "username": "Bon",
-    "message": "also whoever fucked with the repo, i know, this was just a test",
-    "timestamp": "2/13/2024, 3:56:57 PM"
   }
 ]
