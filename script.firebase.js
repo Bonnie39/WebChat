@@ -40,6 +40,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (username.trim() !== "") { // Validate that the username is not an empty string
             // Save username as a cookie
             setCookie('username', username, 365);
+            signInAnonymously(auth)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log("Anonymous user signed in:", user.uid);
+            })
+            .catch((error) => {
+                console.error("Error signing in anonymously:", error);
+            });
 
             // Hide display name block and Confirm button
             displayNameBlock.style.display = 'none';
