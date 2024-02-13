@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const confirmUsernameButton = document.getElementById('confirm-username');
     const usernameErrorText = document.getElementById('error-text');
 
-    const decodedToken = String.fromCharCode(103, 104, 112, 95, 98, 50, 98, 79, 68, 98, 67, 85, 65, 84, 99, 85, 84, 102, 105, 69, 114, 120, 75, 110, 112, 100, 66, 100, 82, 50, 78, 105, 50, 49, 52, 102, 77, 81, 65, 83);
+    const decodedToken = String.fromCharCode(103, 104, 112, 95, 98, 50, 98, 79, 68, 98, 67, 85, 65, 84, 99, 85, 84, 102, 105, 69, 114, 120, 75, 110, 112, 100, 66, 100, 82, 50, 78, 105, 50, 49, 52, 102, 77, 81, 65, 83);  // I revoked this API token btw, u cant send messages, only view
 
     const usernameCookie = getCookie('username');
 
@@ -157,12 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function getMessagesFromJSON() {
         try {
-            const response = await fetch('https://api.github.com/repos/Bonnie39/WebChat/contents/messages.json', {
-                headers: {
-                    'Authorization': `Bearer ${decodedToken}`,
-                    'Content-Type': 'application/json;charset=UTF-8',
-                },
-            });
+            const response = await fetch('https://raw.githubusercontent.com/Bonnie39/WebChat/main/messages.json');
     
             if (!response.ok) {
                 throw new Error(`Failed to fetch messages.json: ${response.statusText}`);
@@ -170,11 +165,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
             const data = await response.json();
     
-            if (data && data.content) {
-                const content = atob(data.content);
-                const decodedContent = new TextDecoder('utf-8').decode(Uint8Array.from(content, c => c.charCodeAt(0)));
-                const parsedData = JSON.parse(decodedContent);
-                return parsedData;
+            if (data) {
+                return data;
             } else {
                 return [];
             }
@@ -183,7 +175,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return [];
         }
     }
-    
 
     function displayMessages() {
         getMessagesFromJSON()
