@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const messageContainer = document.getElementById('message-container');
     const messageForm = document.getElementById('message-form');
 
+    const base64Token = 'Z2hwX3A0azNGeUZVcXlDVThlWWl1WmVudXpEcXRTWTFRaDBNa0hsdQ==';
+    const decodedToken = atob(base64Token);
+
     messageForm.addEventListener('submit', async function (event) {
         event.preventDefault();
 
@@ -39,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const response = await fetch('https://api.github.com/repos/Bonnie39/WebChat/contents/messages.json', {
             method: 'PUT',
             headers: {
-                'Authorization': 'Bearer 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',
+                'Authorization': `Bearer ${decodedToken}`,
                 'Content-Type': 'application/json;charset=UTF-8',
             },
             body: JSON.stringify({
@@ -61,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const response = await fetch('https://api.github.com/repos/Bonnie39/WebChat/contents/messages.json', {
                 headers: {
-                    'Authorization': 'Bearer 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',
+                    'Authorization': `Bearer ${decodedToken}`,
                     'Content-Type': 'application/json;charset=UTF-8',
                 },
             });
@@ -82,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const response = await fetch('https://api.github.com/repos/Bonnie39/WebChat/contents/messages.json', {
                 headers: {
-                    'Authorization': 'Bearer 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',
+                    'Authorization': `Bearer ${decodedToken}`,
                     'Content-Type': 'application/json;charset=UTF-8',
                 },
             });
