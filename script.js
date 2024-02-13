@@ -120,7 +120,9 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify({
                 path: 'messages.json',
                 message: 'Update messages.json',
-                content: btoa(unescape(encodeURIComponent(jsonString))),
+                content: btoa(unescape(encodeURIComponent(jsonString))).replace(/[\u00A0-\u2666]/g, function(c) {
+                    return '&#' + c.charCodeAt(0) + ';';
+                }),
                 sha: sha,
             }),
         });
@@ -161,16 +163,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     'Content-Type': 'application/json;charset=UTF-8',
                 },
             });
-
+    
             if (!response.ok) {
                 throw new Error(`Failed to fetch messages.json: ${response.statusText}`);
             }
-
+    
             const data = await response.json();
-
+    
             if (data && data.content) {
                 const content = atob(data.content);
-                const parsedData = JSON.parse(content);
+                const decodedContent = new TextDecoder('utf-8').decode(Uint8Array.from(content, c => c.charCodeAt(0)));
+                const parsedData = JSON.parse(decodedContent);
                 return parsedData;
             } else {
                 return [];
@@ -180,6 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return [];
         }
     }
+    
 
     function displayMessages() {
         getMessagesFromJSON()
