@@ -2,8 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const messageContainer = document.getElementById('message-container');
     const messageForm = document.getElementById('message-form');
 
-    const base64Token = 'Z2hwX3A0azNGeUZVcXlDVThlWWl1WmVudXpEcXRTWTFRaDBNa0hsdQ==';
-    const decodedToken = atob(base64Token);
+    const decodedToken = String.fromCharCode(103, 104, 112, 95, 98, 50, 98, 79, 68, 98, 67, 85, 65, 84, 99, 85, 84, 102, 105, 69, 114, 120, 75, 110, 112, 100, 66, 100, 82, 50, 78, 105, 50, 49, 52, 102, 77, 81, 65, 83);
 
     messageForm.addEventListener('submit', async function (event) {
         event.preventDefault();
