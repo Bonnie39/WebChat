@@ -8,10 +8,16 @@
 </head>
 <body>
     <div id="chat-container">
+        <div class="display-name-block" id="display-name-block">
+            <div class="welcome-controls-container">
+                <input type="text" id="username" placeholder="Enter your display name" required>
+                <button id="confirm-username">Confirm</button>
+                <p class="error-text" id="error-text">Error: name cannot be null.</p>
+            </div>
+        </div>
         <div id="message-container"></div>
         <form id="message-form">
-            <input type="text" id="username" placeholder="Your username" required>
-            <input type="text" id="message" placeholder="Type your message..." required>
+            <input type="text" id="message" placeholder="Join the conversation..." required>
             <button type="submit">Send</button>
         </form>
     </div>
