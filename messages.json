@@ -46,7 +46,7 @@
   },
   {
     "username": "mghlr",
-    "message": "Many computer users run a modified version of the GNU system every day, without realizing it. Through a peculiar turn of events, the version of GNU which is widely used today is often called ÃÂ¢ÃÂÃÂLinux,ÃÂ¢ÃÂÃÂ and many of its users are not aware that it is basically the GNU system, developed by the GNU Project. Most people have never heard of GNU. Even most of the people who use the GNU system have never heard of GNU, since so many people and companies teach them to call it ÃÂ¢ÃÂÃÂLinux.ÃÂ¢ÃÂÃÂ Indeed, GNU users often say they are ÃÂ¢ÃÂÃÂrunning Linux,ÃÂ¢ÃÂÃÂ which is like saying you are ÃÂ¢ÃÂÃÂdriving your carburetorÃÂ¢ÃÂÃÂ or ÃÂ¢ÃÂÃÂdriving your transmission.ÃÂ¢ÃÂÃÂ There really is a Linux, and these people are using it, but it is just a part of the system they use. Linux is the kernel: the program in the system that allocates the machine's resources to the other programs that you run. The kernel is an essential part of an operating system, but useless by itself; it can only function in the context of a complete operating system. Linux is normally used in combination with the GNU operating system: the whole system is basically GNU with Linux added, or GNU/Linux. All the so-called ÃÂ¢ÃÂÃÂLinuxÃÂ¢ÃÂÃÂ distributions are really distributions of GNU/Linux.",
+    "message": "Many computer users run a modified version of the GNU system every day, without realizing it. Through a peculiar turn of events, the version of GNU which is widely used today is often called ÃÂÃÂ¢ÃÂÃÂÃÂÃÂLinux,ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ and many of its users are not aware that it is basically the GNU system, developed by the GNU Project. Most people have never heard of GNU. Even most of the people who use the GNU system have never heard of GNU, since so many people and companies teach them to call it ÃÂÃÂ¢ÃÂÃÂÃÂÃÂLinux.ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Indeed, GNU users often say they are ÃÂÃÂ¢ÃÂÃÂÃÂÃÂrunning Linux,ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ which is like saying you are ÃÂÃÂ¢ÃÂÃÂÃÂÃÂdriving your carburetorÃÂÃÂ¢ÃÂÃÂÃÂÃÂ or ÃÂÃÂ¢ÃÂÃÂÃÂÃÂdriving your transmission.ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ There really is a Linux, and these people are using it, but it is just a part of the system they use. Linux is the kernel: the program in the system that allocates the machine's resources to the other programs that you run. The kernel is an essential part of an operating system, but useless by itself; it can only function in the context of a complete operating system. Linux is normally used in combination with the GNU operating system: the whole system is basically GNU with Linux added, or GNU/Linux. All the so-called ÃÂÃÂ¢ÃÂÃÂÃÂÃÂLinuxÃÂÃÂ¢ÃÂÃÂÃÂÃÂ distributions are really distributions of GNU/Linux.",
     "timestamp": "13.02.2024, 12:11:23"
   },
   {
@@ -63,5 +63,10 @@
     "username": "Cleo",
     "message": "Soup",
     "timestamp": "2024-02-13, 2:18:35 PM"
+  },
+  {
+    "username": "Cleo",
+    "message": "Looks nice, but text should wrap better on mobile lol",
+    "timestamp": "2024-02-13, 2:18:54 PM"
   }
 ]
