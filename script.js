@@ -39,10 +39,16 @@ document.addEventListener('DOMContentLoaded', function () {
     function getMessagesFromJSON() {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', 'messages.json', false);
-        xhr.send();
-
-        return JSON.parse(xhr.responseText) || [];
+    
+        try {
+            xhr.send();
+            return JSON.parse(xhr.responseText) || [];
+        } catch (error) {
+            console.error('Error parsing JSON:', error);
+            return [];
+        }
     }
+    
 
     function displayMessages() {
         const messages = getMessagesFromJSON();
