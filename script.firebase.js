@@ -122,45 +122,43 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    async function getMessagesFromFirebase() {
+    async function getMessagesFromFirebaseRealtime(callback) {
         try {
-            // Retrieve messages from Firebase Firestore
-            const querySnapshot = await getDocs(query(window.messagesRef, orderBy('timestamp')));
-    
-            const messages = [];
-    
-            querySnapshot.forEach(doc => {
-                messages.push(doc.data());
+            // Set up a real-time listener for changes to the messages collection
+            const unsubscribe = onSnapshot(query(window.messagesRef, orderBy('timestamp')), (querySnapshot) => {
+                const messages = [];
+                querySnapshot.forEach(doc => {
+                    messages.push(doc.data());
+                });
+                // Call the provided callback function with the updated messages
+                callback(messages);
             });
     
-            return messages;
+            // Return the unsubscribe function in case you want to stop listening later
+            return unsubscribe;
         } catch (error) {
             console.error('Error fetching messages:', error);
-            return [];
+            return null;
         }
     }
+    
 
-    function displayMessages() {
-        getMessagesFromFirebase()
-            .then(messages => {
-                messageContainer.innerHTML = '';
-
-                messages.forEach(message => {
-                    const messageDiv = document.createElement('div');
-                    messageDiv.classList.add('message');
-                    messageDiv.innerHTML = `<strong>${message.username}:</strong> ${message.message} <span>${new Date(message.timestamp).toLocaleString()}</span>`;
-                    messageContainer.appendChild(messageDiv);
-                });
-            })
-            .then(() => {
-                // After displaying messages, scroll to the bottom
-                messageContainer.scrollTop = messageContainer.scrollHeight;
-            })
-            .catch(error => {
-                console.error('Error displaying messages:', error);
+    function displayMessagesRealtime() {
+        getMessagesFromFirebaseRealtime(messages => {
+            messageContainer.innerHTML = '';
+    
+            messages.forEach(message => {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message');
+                messageDiv.innerHTML = `<strong>${message.username}:</strong> ${message.message} <span>${new Date(message.timestamp).toLocaleString()}</span>`;
+                messageContainer.appendChild(messageDiv);
             });
+    
+            // After displaying messages, scroll to the bottom
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+        });
     }
 
     // Initial display
-    displayMessages();
+    const unsubscribeRealtime = getMessagesFromFirebaseRealtime(displayMessagesRealtime)
 });
