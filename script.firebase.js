@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const usernameCookie = getCookie('username');
 
-    // Existing code for handling display name block
     if (usernameCookie) {
         usernameInput.value = usernameCookie;
         displayNameBlock.style.display = 'none';
@@ -22,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error("Error signing in anonymously:", error);
             });
     } else {
-        // Show the full-screen black background with blur
+        // Blur and darken bg
         document.body.style.overflow = 'hidden';
         displayNameBlock.style.position = 'fixed';
         displayNameBlock.style.top = '0';
@@ -55,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Allow scrolling again
             document.body.style.overflow = 'auto';
         } else {
-            // Show an error message or handle it accordingly
+            // Oopsie daisy
             console.error('Username cannot be empty.');
             usernameErrorText.style.visibility = 'visible';
             setTimeout(function () {
@@ -92,12 +91,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const messageText = document.getElementById('message').value;
 
         if (username && messageText) {
-            // Save username as a cookie
-            setCookie('username', username, 365);
-
-            // Hide display name block if not hidden
-            displayNameBlock.style.display = 'none';
-
             const newMessage = {
                 username: username,
                 message: messageText,
@@ -125,17 +118,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function getMessagesFromFirebaseRealtime(callback) {
         try {
-            // Set up a real-time listener for changes to the messages collection
             const unsubscribe = onSnapshot(query(window.messagesRef, orderBy('timestamp')), (querySnapshot) => {
                 const messages = [];
                 querySnapshot.forEach(doc => {
                     messages.push(doc.data());
                 });
-                // Call the provided callback function with the updated messages
                 callback(messages);
             });
-    
-            // Return the unsubscribe function in case you want to stop listening later
+
             return unsubscribe;
         } catch (error) {
             console.error('Error fetching messages:', error);
