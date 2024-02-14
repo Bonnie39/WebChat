@@ -21,6 +21,16 @@ body {
     max-height: calc(100vh - 120px); /* Adjust the max-height to leave space for the message form */
 }
 
+.message a {
+    color: #a8257f;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.message a:hover {
+    text-decoration: underline;
+}
+
 .message {
     margin-bottom: 15px;
     padding: 15px;
@@ -160,6 +170,10 @@ body {
         background-color: rgba(25, 25, 25, 0.5);
         border: 1px solid rgba(33, 33, 33, 0.7);
         color: #ffffff;
+    }
+
+    .message a {
+        color: #ce97c8;
     }
 
     #message-form {

@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     messageDiv.appendChild(usernameAndTimestamp);
     
                     const messageContent = document.createElement('div');
-                    messageContent.textContent = message.message;
+                    formatMessageContent(message.message, messageContent);
                     messageDiv.appendChild(messageContent);
     
                     messageContainer.appendChild(messageDiv);
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     lastMessageDiv = messageDiv;
                 } else {
                     const messageContent = document.createElement('div');
-                    messageContent.textContent = message.message;
+                    formatMessageContent(message.message, messageContent);
                     lastMessageDiv.appendChild(messageContent);
                 }
             });
@@ -171,6 +171,40 @@ document.addEventListener('DOMContentLoaded', function () {
             messageContainer.scrollTop = messageContainer.scrollHeight;
         });
     }
+    
+    function formatMessageContent(message, messageContent) {
+        const linkRegex = /(https?:\/\/[^\s]+)/g;
+        let lastIndex = 0;
+    
+        while ((match = linkRegex.exec(message)) !== null) {
+            const linkText = match[0];
+            const linkIndex = match.index;
+    
+            // Append text before the link
+            const textBeforeLink = message.substring(lastIndex, linkIndex);
+            if (textBeforeLink.trim() !== '') {
+                const textNode = document.createTextNode(textBeforeLink);
+                messageContent.appendChild(textNode);
+            }
+    
+            // Append the link
+            const linkElement = document.createElement('a');
+            linkElement.href = linkText;
+            linkElement.textContent = linkText;
+            messageContent.appendChild(linkElement);
+    
+            lastIndex = linkIndex + linkText.length;
+        }
+    
+        // Append the remaining text (after removing links)
+        const remainingText = message.substring(lastIndex);
+        if (remainingText.trim() !== '') {
+            const textNode = document.createTextNode(remainingText);
+            messageContent.appendChild(textNode);
+        }
+    }
+    
+    
     
     // Initial display
     const unsubscribeRealtime = getMessagesFromFirebaseRealtime(displayMessagesRealtime)
