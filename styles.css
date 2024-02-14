@@ -36,12 +36,17 @@ body {
 }
 
 #message-form {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
     background-color: #eaeaea;
     border-top: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
 #message-form input {
@@ -67,6 +72,7 @@ body {
     background-color: #9458d6;
 }
 
+
 #display-name-block {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
@@ -81,6 +87,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .welcome-controls-container {

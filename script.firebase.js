@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
         displayNameBlock.style.width = '100vw';
         displayNameBlock.style.height = '100vh';
         displayNameBlock.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-        displayNameBlock.style.backdropFilter = 'blur(5px)';
         confirmUsernameButton.style.display = 'block'; // Show the Confirm button
         usernameErrorText.style.visibility = 'hidden';
     }
