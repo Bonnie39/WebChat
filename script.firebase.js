@@ -138,18 +138,40 @@ document.addEventListener('DOMContentLoaded', function () {
         getMessagesFromFirebaseRealtime(messages => {
             messageContainer.innerHTML = '';
     
+            let lastUserId = null;
+            let lastMessageDiv = null;
+    
             messages.forEach(message => {
-                const messageDiv = document.createElement('div');
-                messageDiv.classList.add('message');
-                messageDiv.innerHTML = `<strong>${message.username}:</strong> ${message.message} <span>${new Date(message.timestamp).toLocaleString()}</span>`;
-                messageContainer.appendChild(messageDiv);
+                const userId = message.uid;
+    
+                if (userId !== lastUserId) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.classList.add('message');
+    
+                    const usernameAndTimestamp = document.createElement('div');
+                    usernameAndTimestamp.innerHTML = `<strong>${message.username}:</strong> <span>${new Date(message.timestamp).toLocaleString()}</span>`;
+                    messageDiv.appendChild(usernameAndTimestamp);
+    
+                    const messageContent = document.createElement('div');
+                    messageContent.textContent = message.message;
+                    messageDiv.appendChild(messageContent);
+    
+                    messageContainer.appendChild(messageDiv);
+    
+                    lastUserId = userId;
+                    lastMessageDiv = messageDiv;
+                } else {
+                    const messageContent = document.createElement('div');
+                    messageContent.textContent = message.message;
+                    lastMessageDiv.appendChild(messageContent);
+                }
             });
     
             // After displaying messages, scroll to the bottom
             messageContainer.scrollTop = messageContainer.scrollHeight;
         });
     }
-
+    
     // Initial display
     const unsubscribeRealtime = getMessagesFromFirebaseRealtime(displayMessagesRealtime)
 });
