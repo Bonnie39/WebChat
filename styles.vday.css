@@ -1,0 +1,189 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+}
+
+#chat-container {
+    background: linear-gradient(45deg, #ffdbf3, #ce97c8, #ffc9d5);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Set min-height to 100vh to ensure it takes at least the full viewport height */
+}
+
+#message-container {
+    background: linear-gradient(45deg, #ffdbf3, #ce97c8, #ffc9d5);
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    max-height: calc(100vh - 120px); /* Adjust the max-height to leave space for the message form */
+}
+
+.message {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: rgba(234, 234, 234, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+}
+
+.message strong {
+    font-weight: bold;
+}
+
+.message span {
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+#message-form {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: linear-gradient(45deg, #ffdbf3, #ce97c8, #ffc9d5);
+    border-top: 1px solid rgba(204, 204, 204, 0.5);
+    box-sizing: border-box;
+}
+
+#message-form input {
+    flex-grow: 1;
+    margin-right: 15px;
+    padding: 12px 20px;
+    border-top: 1px solid rgba(204, 204, 204, 0.5);
+    border-left: 1px solid rgba(204, 204, 204, 0.5);
+    border-radius: 5px;
+    outline: none;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#message-form button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#message-form button:hover {
+    background-color: #1c1c1c;
+}
+
+
+#display-name-block {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 5000;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.welcome-controls-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error-text {
+    position: absolute;
+    color: red;
+    margin-top: 110px;
+}
+
+#username {
+    margin-bottom: 15px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+}
+
+#confirm-username {
+    background-color: #000000;
+    border: 1px solid #ccc;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+#confirm-username:hover {
+    background-color: #1c1c1c;
+}
+
+/* Dark Mode Styles */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(45deg, #a8257f, #6c1851, #c22849);
+        color: #ffffff;
+    }
+
+    #chat-container {
+        background: linear-gradient(45deg, #a8257f, #6c1851, #c22849);
+    }
+
+    #message-container {
+        background: linear-gradient(45deg, #a8257f, #6c1851, #c22849);
+    }
+
+    .message {
+        background-color: rgba(25, 25, 25, 0.5);
+        border: 1px solid rgba(33, 33, 33, 0.7);
+        color: #ffffff;
+    }
+
+    #message-form {
+        background: linear-gradient(45deg, #a8257f, #6c1851, #c22849);
+        border-top: 1px solid #333333;
+    }
+
+    #message-form input {
+        border: 1px solid #333333;
+        color: #ffffff;
+        background-color: rgba(25, 25, 25, 0.5);
+    }
+
+    #display-name-block {
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .error-text {
+        color: #ff5555;
+    }
+
+    #username {
+        border: 1px solid #555555;
+        color: #ffffff;
+        background-color: rgba(25, 25, 25, 0.5);
+    }
+}
