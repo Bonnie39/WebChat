@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         signInAnonymously(auth)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log("Anonymous user signed in:", user.uid);
+                //console.log("Anonymous user signed in:", user.uid);
             })
             .catch((error) => {
                 console.error("Error signing in anonymously:", error);
@@ -101,25 +101,27 @@ document.addEventListener('DOMContentLoaded', function () {
             const newMessage = {
                 username: username,
                 message: messageText,
-                timestamp: getServerTimestamp(),
+                timestamp: Date.now(),
                 uid: auth.currentUser.uid,
             };
 
             await addMessageToFirebase(newMessage);
             messageForm.reset();
-            displayMessages();
+            //displayMessages();
         }
     });
 
     async function addMessageToFirebase(message) {
         try {
             // Add a new document to the "messages" collection
-            const docRef = await addDoc(window.messagesRef, message);
+            const docRef = await addDoc(window.messagesRef, {
+                ...message,
+            });
             console.log('Message added successfully with ID:', docRef.id);
         } catch (error) {
             console.error('Error adding message:', error);
         }
-    }    
+    }
 
     async function getMessagesFromFirebaseRealtime(callback) {
         try {
