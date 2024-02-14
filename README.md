@@ -9,3 +9,8 @@ the API token has since been revoked and you can now only read messages
 this was a fun experiment and I think it has given me an idea for a future project
 
 if you want, you can view the messages that were sent before I took it down <a href="https://bonnie39.github.io/WebChat/">here</a>.
+
+
+## UPDATE:
+
+this project has been reworked to use firebase instead of github and is now usable once again (and more secure hopefully)
