@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const newMessage = {
                 username: username,
                 message: messageText,
-                timestamp: serverTimestamp(),
+                timestamp: getServerTimestamp(),
                 uid: auth.currentUser.uid,
             };
 
