@@ -28,8 +28,12 @@
 <script type="module">
     // Import the necessary modules
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    function serverTimestamp() {
+        return serverTimestamp();
+    }
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
@@ -68,6 +72,7 @@
     window.orderBy = orderBy;
     window.signInAnonymously = signInAnonymously;
     window.onSnapshot = onSnapshot;
+    window.serverTimestamp = serverTimestamp;
 </script>
 </body>
 </html>

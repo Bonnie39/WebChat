@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const newMessage = {
                 username: username,
                 message: messageText,
-                timestamp: new Date().toISOString(),
+                timestamp: serverTimestamp(),
                 uid: auth.currentUser.uid,
             };
 
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } catch (error) {
             console.error('Error adding message:', error);
         }
-    }
+    }    
 
     async function getMessagesFromFirebaseRealtime(callback) {
         try {
