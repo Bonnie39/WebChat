@@ -65,7 +65,7 @@ body {
 #message-form input {
     flex-grow: 1;
     margin-right: 15px;
-    padding: 10px;
+    padding: 12px 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
