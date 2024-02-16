@@ -64,26 +64,45 @@ body {
 
 #message-form input {
     flex-grow: 1;
-    margin-right: 15px;
+    margin-right: 0px;
     padding: 12px 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
 }
 
-#message-form button {
+#message-form input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#message-form svg {
+    margin-right: 1px;
+    margin-top: 2px;
+}
+
+#message-form .send-button {
     background-color: #000000;
     color: white;
     border: none;
     padding: 12px 20px;
+    height: 42px;
+    border: 1px solid #ccc;
+    border-left: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-#message-form button:hover {
+#message-form .send-button:hover {
     background-color: #1c1c1c;
 }
+
+#message-form .send-button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
 
 #display-name-block {
     background-color: rgba(255, 255, 255, 0.9);
@@ -177,12 +196,12 @@ body {
         background-color: #252525;
     }
 
-    #message-form button {
+    #message-form .send-button {
         background-color: #ffffff;
         color: rgb(0, 0, 0);
     }
     
-    #message-form button:hover {
+    #message-form .send-button:hover {
         background-color: #dfdfdf;
     }
 
