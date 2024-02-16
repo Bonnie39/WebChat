@@ -173,6 +173,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
     function formatMessageContent(message, messageContent) {
+        // Replace emoji keywords with corresponding emoji symbols
+        const emojiRegex = /:([a-zA-Z0-9_+-]+):/g;
+        message = message.replace(emojiRegex, (match, p1) => {
+            // Check if the emoji keyword exists in your predefined list
+            const emojiSymbol = getEmojiSymbol(p1);
+            return emojiSymbol ? emojiSymbol : match;
+        });
+    
+        // Parse markdown formatting
+        message = parseMarkdown(message);
+    
         const linkRegex = /(https?:\/\/[^\s]+)/g;
         let lastIndex = 0;
     
@@ -204,7 +215,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
     
+    function getEmojiSymbol(emojiKeyword) {
+        const emojiMap = {
+            'skull': '💀',
+        };
     
+        return emojiMap[emojiKeyword];
+    }
+
+    function parseMarkdown(message) {
+        return message.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    }
     
     // Initial display
     const unsubscribeRealtime = getMessagesFromFirebaseRealtime(displayMessagesRealtime)
