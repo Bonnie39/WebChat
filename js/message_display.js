@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     function formatMessageContent(message, messageContent) {
         const linkRegex = /(https?:\/\/[^\s]+)/g;
+        const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
     
         let formattedContent = message
             // Handle headers
@@ -87,7 +88,21 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             // Replace links
             .replace(linkRegex, (match) => {
-                return `<a href="${match}" target="_blank">${match}</a>`;
+                const youtubeMatch = match.match(youtubeRegex);
+                if (youtubeMatch) {
+                    const videoId = youtubeMatch[1];
+                    const videoTitle = null; // You can fetch the video title using the YouTube API or use a placeholder
+            
+                    // Replace links with video embeds
+                    return `<div class="youtube-video">
+                                <a href="${match}" target="_blank">${videoTitle || match}</a>
+                                <div class="video-container">
+                                    <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>`;
+                } else {
+                    return `<a href="${match}" target="_blank">${match}</a>`;
+                }
             });
     
         messageContent.innerHTML = formattedContent;

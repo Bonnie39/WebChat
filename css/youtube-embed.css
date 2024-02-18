@@ -1,0 +1,66 @@
+.youtube-video {
+    position: relative;
+    max-width: 100%;
+    margin: 10px 0;
+    max-width: 560px;
+}
+
+.youtube-video a {
+    display: block;
+    color: #7289da;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.message .youtube-video {
+    background-color: #36393f;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.message .youtube-video a {
+    padding: 10px;
+}
+
+.message .youtube-video a:hover {
+    background-color: #7289da;
+    color: #fff;
+    text-decoration: none;
+}
+
+.message .youtube-video .video-container {
+    border-top: 1px solid #2f3136;
+}
+
+/* Dark Mode Styles for Video Embeds */
+@media (prefers-color-scheme: dark) {
+    .message .youtube-video {
+        background-color: #2f3136;
+    }
+
+    .message .youtube-video a:hover {
+        background-color: #7289da;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .message .youtube-video .video-container {
+        border-top: 1px solid #36393f;
+    }
+}
