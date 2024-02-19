@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/youtube-embed.css">
     <link rel="stylesheet" href="/css/gradient.css">
+    <link rel="stylesheet" href="/css/media_sharing.css">
 
     <link rel="stylesheet" href="/WebChat/css/styles.css">
     <link rel="stylesheet" href="/WebChat/css/youtube-embed.css">
     <link rel="stylesheet" href="/WebChat/css/gradient.css">
+    <link rel="stylesheet" href="/WebChat/css/media_sharing.css">
 </head>
 <body>
     <canvas id="gradient-canvas"></canvas>
@@ -23,6 +25,7 @@
             </div>
         </div>
         <div id="message-container"></div>
+        <div id="image-preview-container"></div>
         <form id="message-form">
             <button type="button" class="add-image-button" id="add-image-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -30,7 +33,7 @@
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                   </svg>
             </button>
-            <input id="message" placeholder="Join the conversation..." required autocomplete="off"></input>
+            <input id="message" placeholder="Join the conversation..." autocomplete="off"></input>
             <button type="submit" class="send-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
                     <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
@@ -47,6 +50,7 @@
 
 <script src="/WebChat/js/script.firebase.js"></script>
 <script src="/WebChat/js/message_display.js"></script>
+<script src="/WebChat/js/media_sharing.js"></script>
 <script src="/WebChat/js/emoji_map.js"></script>
 <script src="/WebChat/js/gradient.js"></script>
 

@@ -1,26 +1,64 @@
-document.getElementById('add-image-button').addEventListener('click', function() {
-    // Create a file input element
-    var input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    input.multiple = true;
-    input.setAttribute('style', 'display: none');
+document.addEventListener('DOMContentLoaded', function () {
+    const imagePreviewContainer = document.getElementById('image-preview-container');
+    const addImageButton = document.getElementById('add-image-button');
+    const messageForm = document.getElementById('message-form');
+    const messageInput = document.getElementById('message');
+    const maxImagePreviews = 4;
 
-    // Trigger a click event on the file input
-    input.click();
+    imagePreviewContainer.style.visibility = 'hidden'; // make sure it's hidden on page load
 
-    // Add change event listener to handle selected files
-    input.addEventListener('change', function() {
-        var selectedFiles = input.files;
-        var maxFiles = 4;
+    addImageButton.addEventListener('click', function () {
+        var input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.multiple = true;
+        input.setAttribute('style', 'display: none');
 
-        if (selectedFiles.length > maxFiles) {
-            alert('Please select up to ' + maxFiles + ' image files.');
-            // Clear the file input
+        input.click();
+
+        // Add change event listener to handle selected files
+        input.addEventListener('change', function () {
+            // Display up to maxImagePreviews image previews
+            for (let i = 0; i < Math.min(input.files.length, maxImagePreviews); i++) {
+                // Create a container div for each image
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'image-container';
+
+                // Create the image delete button
+                const closeButton = document.createElement('button');
+                closeButton.className = 'close-button';
+                closeButton.innerHTML = 'X';
+
+                // Create the image preview
+                const imagePreview = document.createElement('img');
+                imagePreview.src = URL.createObjectURL(input.files[i]);
+
+                // Add close button click event listener to remove the image
+                closeButton.addEventListener('click', function () {
+                    imageContainer.remove();
+                    toggleImageContainerVisibility();
+                });
+
+                // Append elements to the container div
+                imageContainer.appendChild(closeButton);
+                imageContainer.appendChild(imagePreview);
+
+                // Append the container div to the image preview container
+                imagePreviewContainer.appendChild(imageContainer);
+            }
+
+            toggleImageContainerVisibility();
+
+            // Clear the file input to allow adding more images
             input.value = '';
-        } else {
-            // Handle the selected files (you can process or display them as needed)
-            console.log(selectedFiles);
-        }
+
+            messageInput.focus();
+        });
+
+        messageForm.appendChild(input);
     });
+
+    function toggleImageContainerVisibility() {
+        imagePreviewContainer.style.visibility = imagePreviewContainer.children.length > 0 ? 'visible' : 'hidden';
+    }
 });

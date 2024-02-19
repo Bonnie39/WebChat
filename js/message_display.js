@@ -44,6 +44,20 @@ document.addEventListener('DOMContentLoaded', function () {
     
                     const messageContent = document.createElement('div');
                     formatMessageContent(message.message, messageContent);
+                    // Append image previews to the message content
+                    if (message.images && message.images.length > 0) {
+                        const imagePreviewContainer = document.createElement('div');
+                        imagePreviewContainer.className = 'image-preview-container';
+    
+                        message.images.forEach(imageData => {
+                            const imagePreview = document.createElement('img');
+                            imagePreview.src = imageData;
+                            imagePreviewContainer.appendChild(imagePreview);
+                        });
+    
+                        messageContent.appendChild(imagePreviewContainer);
+                    }
+    
                     messageDiv.appendChild(messageContent);
     
                     messageContainer.appendChild(messageDiv);
@@ -55,6 +69,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else {
                     const messageContent = document.createElement('div');
                     formatMessageContent(message.message, messageContent);
+                    // Append image previews to the message content
+                    if (message.images && message.images.length > 0) {
+                        const imagePreviewContainer = document.createElement('div');
+                        imagePreviewContainer.className = 'image-preview-container';
+    
+                        message.images.forEach(imageData => {
+                            const imagePreview = document.createElement('img');
+                            imagePreview.src = imageData;
+                            imagePreviewContainer.appendChild(imagePreview);
+                        });
+    
+                        messageContent.appendChild(imagePreviewContainer);
+                    }
+    
                     lastMessageDiv.appendChild(messageContent);
                 }
             });

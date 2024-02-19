@@ -1,0 +1,95 @@
+#image-preview-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    position: fixed;
+    bottom: 60px; /* Adjust this value based on your layout */
+    left: 0;
+    z-index: 99; /* Make sure it's above the message form */
+    position: fixed;
+    margin-bottom: 21px;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    background-color: rgba(230, 230, 230, 0.6);
+    border-top: 1px solid rgba(204, 204, 204, 0.25);
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    overflow-x: auto;
+}
+
+#image-preview-container img {
+    max-height: 250px;
+    max-width: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    margin-right: 10px;
+}
+
+#image-preview-container .image-container {
+    position: relative;
+    display: inline-block;
+}
+
+#image-preview-container .close-button {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: rgba(37, 37, 37, 0.5);
+    border: 1px solid #333333;
+    cursor: pointer;
+    font-size: 16px;
+    color: #ff4d4d; /* Red color for the X */
+    border-radius: 50%;
+    width: 25px; /* Adjust the size of the button */
+    height: 25px; /* Adjust the size of the button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, color 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+#image-preview-container .close-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(37, 37, 37, 0.5);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+#image-preview-container .close-button:hover {
+    background: rgba(255, 77, 77, 0.8); /* Red background on hover */
+    color: #ffffff; /* White color on hover */
+}
+
+@media (prefers-color-scheme: dark) {
+    #image-preview-container {
+        background-color: rgba(37, 37, 37, 0.5);
+        border-top: 1px solid #333333;
+        border-bottom: 1px solid #333333;
+    }
+}
+
+.image-preview-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow images to wrap to the next line on narrow screens */
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.image-preview-container img {
+    max-width: 100%; /* Make images responsive */
+    max-height: auto; /* Set a maximum height as needed */
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
