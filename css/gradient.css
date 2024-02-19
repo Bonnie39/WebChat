@@ -1,0 +1,18 @@
+#gradient-canvas {
+    filter: blur(50px);
+    overflow-y: hidden;
+    width: 100vw;
+    min-height: 100vh;
+    --gradient-color-1: #000000;
+    --gradient-color-2: #57268f;
+    --gradient-color-3: rgb(35, 44, 75);
+    --gradient-color-4: #000000;
+    z-index: -1;
+    position: fixed;
+    scale: 1.8;
+    filter: blur(50px);
+  }
+
+#gradient-canvas {
+  opacity: 1;
+}

@@ -35,7 +35,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     messageDiv.classList.add('message');
     
                     const usernameAndTimestamp = document.createElement('div');
-                    usernameAndTimestamp.innerHTML = `<strong>${message.username}:</strong> <span>${new Date(message.timestamp).toLocaleString()}</span>`;
+                    const messageTimestamp = new Date(message.timestamp).toLocaleString();
+                    if (messageTimestamp == "Invalid Date") {   //  also helps with spam bots
+                        return;
+                    }
+                    usernameAndTimestamp.innerHTML = `<strong>${message.username}:</strong> <span>${messageTimestamp}</span>`;
                     messageDiv.appendChild(usernameAndTimestamp);
     
                     const messageContent = document.createElement('div');
@@ -46,6 +50,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
                     lastUserId = userId;
                     lastMessageDiv = messageDiv;
+                } else if(userId == "lxFLBTiSeQcZZ62XWUDC3ydoR2K2") {   //  banned user
+                    return;
                 } else {
                     const messageContent = document.createElement('div');
                     formatMessageContent(message.message, messageContent);
