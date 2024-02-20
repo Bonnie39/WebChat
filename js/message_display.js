@@ -86,10 +86,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     lastMessageDiv.appendChild(messageContent);
                 }
             });
+
+            var numberOfScrolls = 2;
     
             // After displaying messages, scroll to the bottom
-            messageContainer.scrollTop = messageContainer.scrollHeight;
+            for (var i = 0; i < numberOfScrolls; i++) {
+                setTimeout(scrollToBottom, i * 250); // Adjust the delay (in milliseconds) as needed
+            }
         });
+    }
+
+    function scrollToBottom() {
+        messageContainer.scrollTop = messageContainer.scrollHeight;
     }
     
     function getEmojiSymbol(emojiKeyword) {
