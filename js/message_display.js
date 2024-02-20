@@ -39,6 +39,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (messageTimestamp == "Invalid Date") {   //  also helps with spam bots
                         return;
                     }
+                    if (message.username == "") {
+                        return;
+                    }
                     usernameAndTimestamp.innerHTML = `<strong>${message.username}:</strong> <span>${messageTimestamp}</span>`;
                     messageDiv.appendChild(usernameAndTimestamp);
     
@@ -133,11 +136,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 const youtubeMatch = match.match(youtubeRegex);
                 if (youtubeMatch) {
                     const videoId = youtubeMatch[1];
-                    const videoTitle = null; // You can fetch the video title using the YouTube API or use a placeholder
             
                     // Replace links with video embeds
                     return `<div class="youtube-video">
-                                <a href="${match}" target="_blank">${videoTitle || match}</a>
+                                <a href="${match}" target="_blank">${match}</a>
                                 <div class="video-container">
                                     <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
                                 </div>
