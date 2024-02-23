@@ -3,9 +3,9 @@
     gap: 10px;
     margin-top: 10px;
     position: fixed;
-    bottom: 60px; /* Adjust this value based on your layout */
+    bottom: 60px;
     left: 0;
-    z-index: 99; /* Make sure it's above the message form */
+    z-index: 99;
     position: fixed;
     margin-bottom: 21px;
     width: 100vw;
@@ -43,10 +43,10 @@
     border: 1px solid #333333;
     cursor: pointer;
     font-size: 16px;
-    color: #ff4d4d; /* Red color for the X */
+    color: #ff4d4d;
     border-radius: 50%;
-    width: 25px; /* Adjust the size of the button */
-    height: 25px; /* Adjust the size of the button */
+    width: 25px;
+    height: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,8 +68,8 @@
 }
 
 #image-preview-container .close-button:hover {
-    background: rgba(255, 77, 77, 0.8); /* Red background on hover */
-    color: #ffffff; /* White color on hover */
+    background: rgba(255, 77, 77, 0.8);
+    color: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -80,16 +80,19 @@
     }
 }
 
-.image-preview-container {
+.media-preview-container {
     display: flex;
-    flex-wrap: wrap; /* Allow images to wrap to the next line on narrow screens */
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 10px;
+    max-width: 960px;
 }
 
-.image-preview-container img {
-    max-width: 100%; /* Make images responsive */
-    max-height: auto; /* Set a maximum height as needed */
+.media-preview-container img {
+    max-width: 100%;
+    height: auto;
+    max-height: 360px;
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    object-fit: contain;
 }

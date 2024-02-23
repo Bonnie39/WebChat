@@ -4,37 +4,72 @@ document.addEventListener('DOMContentLoaded', function () {
     messageForm.addEventListener('submit', async function (event) {
         event.preventDefault();
     
+        console.log('Submit button clicked');
+    
         const username = window.userDisplayName;
         const messageText = document.getElementById('message').value;
     
-        // Gather image data from the image preview container
-        const imagePreviews = document.getElementById('image-preview-container').children;
-        const imageArray = [];
+        // Gather media data from the image preview container
+        const mediaPreviews = document.getElementById('image-preview-container').children;
+        const mediaArray = [];
     
-        for (const imageContainer of imagePreviews) {
-            const image = imageContainer.querySelector('img');
-            if (image) {
-                // Convert the image to base64 and add to the array
-                const base64Image = await getBase64Image(image);
-                imageArray.push(base64Image);
+        console.log('Media previews count:', mediaPreviews.length);
+    
+        // Create a reference to the Firebase Storage bucket
+        const storageRef = window.storageRef;
+        const storage = window.storage;
+    
+        for (const mediaContainer of mediaPreviews) {
+            // Get the image directly from the container
+            const mediaImage = mediaContainer.querySelector('img');
+            
+            console.log('Media image found:', mediaImage);
+    
+            // Check if media image is found
+            if (mediaImage && mediaImage.src) {
+                console.log('Media source:', mediaImage.src);
+    
+                const fileId = generateUniqueFileName();
+                const filePath = `media/${fileId}`;
+                const fileRef = ref(storage, filePath);
+    
+                // Convert blob URL to Blob object
+                const blob = await fetch(mediaImage.src).then(res => res.blob());
+    
+                const uploadTask = uploadBytes(fileRef, blob);
+                const snapshot = await uploadTask;
+    
+                const downloadURL = await getDownloadURL(fileRef);
+    
+                mediaArray.push({ type: 'image', data: downloadURL });
             }
         }
     
-        // Check if there's text or images to send
-        if ((messageText && messageText.trim() !== '') || imageArray.length > 0) {
+        console.log('Media array:', mediaArray);
+    
+        // Check if there's text or media to send
+        if ((messageText && messageText.trim() !== '') || mediaArray.length > 0) {
+            console.log('Sending message to Firebase');
+            
             const newMessage = {
                 username: username,
                 message: messageText,
-                images: imageArray,
+                media: mediaArray,
                 timestamp: Date.now(),
                 uid: auth.currentUser.uid,
             };
     
             messageForm.reset();
-            clearImagePreviews();
+            clearMediaPreviews();
             await addMessageToFirebase(newMessage);
         }
     });
+    
+    
+    function generateUniqueFileName() {
+        // Implement a function to generate a unique file name, e.g., using a timestamp
+        return Date.now().toString();
+    }
     
     async function addMessageToFirebase(message) {
         if (message.username != "") {
@@ -47,6 +82,38 @@ document.addEventListener('DOMContentLoaded', function () {
             } catch (error) {
                 console.error('Error adding message:', error);
             }
+        }
+    }
+    
+    async function getBase64Media(mediaElement) {
+        if (!mediaElement) {
+            console.error('Media element is undefined');
+            return null;
+        }
+    
+        try {
+            const fileExtension = mediaElement.getAttribute('data-extension');
+    
+            if (fileExtension === 'gif') {
+                // If it's a GIF, read the file as base64 data
+                const gifBase64 = await convertGifToBase64(mediaElement.src);
+                return gifBase64;
+            } else if (mediaElement.tagName.toLowerCase() === 'img') {
+                // If it's an image (static or GIF), convert and get base64 data
+                return await getBase64Image(mediaElement);
+            } else if (mediaElement.tagName.toLowerCase() === 'video') {
+                // For regular videos, get base64 data
+                return await getBase64Video(mediaElement);
+            } else if (mediaElement.tagName.toLowerCase() === 'audio') {
+                // For regular audio, get base64 data
+                return await getBase64Audio(mediaElement);
+            } else {
+                console.error('Unsupported media type:', mediaElement.tagName);
+                return null;
+            }
+        } catch (error) {
+            console.error('Error converting media to base64:', error);
+            return null;
         }
     }
     
@@ -68,10 +135,44 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     
-    // Function to clear image previews container
-    function clearImagePreviews() {
-        const imagePreviewContainer = document.getElementById('image-preview-container');
-        imagePreviewContainer.innerHTML = '';
-        imagePreviewContainer.style.visibility = 'hidden';
+    function convertGifToBase64(gifURL) {
+        return new Promise((resolve) => {
+            import("https://raw.githubusercontent.com/matt-way/gifuct-js/master/lib/index.js").then(({ parseGIF, decompressFrames }) => {
+                fetch(gifURL)
+                    .then(resp => resp.arrayBuffer())
+                    .then(buff => {
+                        var gif = parseGIF(buff);
+                        var frames = decompressFrames(gif, true);
+    
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+    
+                        // Set canvas dimensions based on the gif dimensions
+                        canvas.width = gif.width;
+                        canvas.height = gif.height;
+    
+                        // Draw each frame on the canvas
+                        frames.forEach((frame, index) => {
+                            ctx.putImageData(frame, 0, 0);
+                            gif.addFrame(ctx, { delay: gif.frames[index].delay * 10 }); // Adjust delay as needed
+                        });
+    
+                        gif.on('finished', (blob) => {
+                            const reader = new FileReader();
+                            reader.onloadend = () => resolve(reader.result);
+                            reader.readAsDataURL(blob);
+                        });
+    
+                        gif.render();
+                    });
+            });
+        });
+    }
+    
+    // Function to clear previews container
+    function clearMediaPreviews() {
+        const mediaPreviewContainer = document.getElementById('image-preview-container');
+        mediaPreviewContainer.innerHTML = '';
+        mediaPreviewContainer.style.visibility = 'hidden';
     }
 });

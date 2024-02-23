@@ -10,9 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
     addImageButton.addEventListener('click', function () {
         var input = document.createElement('input');
         input.type = 'file';
-        input.accept = 'image/*';
+        input.accept = 'image/*, video/*, .gif';
         input.multiple = true;
         input.setAttribute('style', 'display: none');
+        document.body.appendChild(input);
 
         input.click();
 
@@ -32,6 +33,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Create the image preview
                 const imagePreview = document.createElement('img');
                 imagePreview.src = URL.createObjectURL(input.files[i]);
+                
+                // Add data-extension attribute to the image element
+                const fileExtension = input.files[i].name.split('.').pop();
+                imagePreview.setAttribute('data-extension', fileExtension);
 
                 // Add close button click event listener to remove the image
                 closeButton.addEventListener('click', function () {
