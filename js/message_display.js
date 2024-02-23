@@ -100,11 +100,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
     
-            var numberOfScrolls = 2;
+            var numberOfScrolls = 3;
     
             // After displaying messages, scroll to the bottom
             for (var i = 0; i < numberOfScrolls; i++) {
-                setTimeout(scrollToBottom, i * 250); // Adjust the delay (in milliseconds) as needed
+                setTimeout(scrollToBottom, i * 360); // Adjust the delay (in milliseconds) as needed
             }
         });
     }
