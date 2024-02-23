@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         input.click();
 
+        let imagePreview = null;
+        let videoPreview = null;
+
         // Add change event listener to handle selected files
         input.addEventListener('change', function () {
             // Display up to maxImagePreviews image previews
@@ -24,30 +27,39 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Create a container div for each image
                 const imageContainer = document.createElement('div');
                 imageContainer.className = 'image-container';
-
+            
                 // Create the image delete button
                 const closeButton = document.createElement('button');
                 closeButton.className = 'close-button';
                 closeButton.innerHTML = 'X';
-
-                // Create the image preview
-                const imagePreview = document.createElement('img');
-                imagePreview.src = URL.createObjectURL(input.files[i]);
-                
-                // Add data-extension attribute to the image element
+            
                 const fileExtension = input.files[i].name.split('.').pop();
-                imagePreview.setAttribute('data-extension', fileExtension);
-
+            
+                if (fileExtension === "png" || fileExtension === "jpg" || fileExtension === "gif") {
+                    // Create the image preview
+                    imagePreview = document.createElement('img');
+                    imagePreview.src = URL.createObjectURL(input.files[i]);
+                    // imagePreview.setAttribute('data-extension', fileExtension);
+                } else if (fileExtension === "mp4") {
+                    videoPreview = document.createElement('video');
+                    videoPreview.src = URL.createObjectURL(input.files[i]);
+                }
+            
                 // Add close button click event listener to remove the image
                 closeButton.addEventListener('click', function () {
                     imageContainer.remove();
                     toggleImageContainerVisibility();
                 });
-
+            
                 // Append elements to the container div
                 imageContainer.appendChild(closeButton);
-                imageContainer.appendChild(imagePreview);
-
+                if (imagePreview !== null) {
+                    imageContainer.appendChild(imagePreview);
+                }
+                if (videoPreview !== null) {
+                    imageContainer.appendChild(videoPreview);
+                }
+            
                 // Append the container div to the image preview container
                 imagePreviewContainer.appendChild(imageContainer);
             }

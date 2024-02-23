@@ -22,7 +22,8 @@
     overflow-x: auto;
 }
 
-#image-preview-container img {
+#image-preview-container img,
+#image-preview-container video {
     max-height: 250px;
     max-width: auto;
     border-radius: 8px;
@@ -88,7 +89,8 @@
     max-width: 960px;
 }
 
-.media-preview-container img {
+.media-preview-container img,
+.media-preview-container video {
     max-width: 100%;
     height: auto;
     max-height: 360px;

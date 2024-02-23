@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         for (const mediaContainer of mediaPreviews) {
             // Get the image directly from the container
             const mediaImage = mediaContainer.querySelector('img');
+            const mediaVideo = mediaContainer.querySelector('video');
             
             console.log('Media image found:', mediaImage);
     
@@ -37,11 +38,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 const blob = await fetch(mediaImage.src).then(res => res.blob());
     
                 const uploadTask = uploadBytes(fileRef, blob);
-                const snapshot = await uploadTask;
+                await uploadTask;
     
                 const downloadURL = await getDownloadURL(fileRef);
     
                 mediaArray.push({ type: 'image', data: downloadURL });
+            } else if (mediaVideo && mediaVideo.src) {
+                console.log('Media Source:', mediaVideo.src);
+
+                const fileId = generateUniqueFileName();
+                const filePath = `media/${fileId}`;
+                const fileRef = ref(storage, filePath);
+    
+                // Convert blob URL to Blob object
+                const blob = await fetch(mediaVideo.src).then(res => res.blob());
+    
+                const uploadTask = uploadBytes(fileRef, blob);
+                await uploadTask;
+    
+                const downloadURL = await getDownloadURL(fileRef);
+    
+                mediaArray.push({ type: 'video', data: downloadURL });
             }
         }
     
