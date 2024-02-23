@@ -20,6 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
         let imagePreview = null;
         let videoPreview = null;
 
+        // Array of known image file extensions
+        const imageExtensions = ["png", "jpg", "gif", "bmp", "tiff", "webp", "jpeg", "exif", "heif"];
+
+        // Array of known video file extensions
+        const videoExtensions = ["mp4", "avi", "mkv", "mov", "wmv", "flv", "mpeg", "3gp", "webm", "ogv"];
+
         // Add change event listener to handle selected files
         input.addEventListener('change', function () {
             // Display up to maxImagePreviews image previews
@@ -35,12 +41,12 @@ document.addEventListener('DOMContentLoaded', function () {
             
                 const fileExtension = input.files[i].name.split('.').pop();
             
-                if (fileExtension === "png" || fileExtension === "jpg" || fileExtension === "gif") {
+                if (imageExtensions.includes(fileExtension)) {
                     // Create the image preview
                     imagePreview = document.createElement('img');
                     imagePreview.src = URL.createObjectURL(input.files[i]);
                     // imagePreview.setAttribute('data-extension', fileExtension);
-                } else if (fileExtension === "mp4") {
+                } else if (videoExtensions.includes(fileExtension)) {
                     videoPreview = document.createElement('video');
                     videoPreview.src = URL.createObjectURL(input.files[i]);
                 }
