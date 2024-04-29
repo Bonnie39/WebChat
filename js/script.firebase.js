@@ -78,6 +78,9 @@ document.addEventListener('DOMContentLoaded', function () {
     
             messageForm.reset();
             clearMediaPreviews();
+            if(auth.currentUser.uid == "eRoaFMzZ4uRWa4yQ08G1IxXAT0T2") {
+                return; // fuck you kid
+            }
             await addMessageToFirebase(newMessage);
         }
     });

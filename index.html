@@ -42,15 +42,13 @@
         </form>
     </div>
 
-    <!--    THIRDPARTY JS   -->
-<script src="https://raw.githubusercontent.com/matt-way/gifuct-js/master/lib/index.js"></script>
-
 <script src="/js/script.firebase.js"></script>
 <script src="/js/message_display.js"></script>
 <script src="/js/media_sharing.js"></script>
 <script src="/js/emoji_map.js"></script>
 <script src="/js/gradient.js"></script>
 <script src="/js/user_setup.js"></script>
+<script src="/js/nuke_messages.js"></script>
 
 <script src="/WebChat/js/script.firebase.js"></script>
 <script src="/WebChat/js/message_display.js"></script>
@@ -64,7 +62,7 @@
 <script type="module">
     // Import the necessary modules
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot, where, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
@@ -112,6 +110,9 @@
     window.ref = ref;
     window.uploadBytes = uploadBytes;
     window.getDownloadURL = getDownloadURL;
+    window.collection = collection;
+    window.where = where;
+    window.deleteDoc = deleteDoc;
 </script>
 </body>
 </html>

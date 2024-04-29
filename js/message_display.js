@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
                     lastUserId = userId;
                     lastMessageDiv = messageDiv;
-                } else if (userId == "lxFLBTiSeQcZZ62XWUDC3ydoR2K2") {   //  banned user
+                } else if (userId == "lxFLBTiSeQcZZ62XWUDC3ydoR2K2" || userId == "eRoaFMzZ4uRWa4yQ08G1IxXAT0T2" || userId == "Xhx9ZUl30sWNByYa0KezMiTu1yn1") {   //  banned users
                     return;
                 } else {
                     const messageContent = document.createElement('div');
